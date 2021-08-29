@@ -2,18 +2,27 @@ package main
 
 import (
 	"fmt"
-	"log"
+	"golang-rest-crud/controllers"
+	"golang-rest-crud/db"
+	"golang-rest-crud/repository"
+	"golang-rest-crud/services"
 
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	fmt.Println("Hello World")
-	dsn := "root:@tcp(127.0.0.1:3306)/golang-rest-crud?charset=utf8mb4&parseTime=True&loc=Local"
-	_, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+	db := db.GetDbCon()
+
+	userRepository := repository.NewUserRepo(db)
+	userService := services.NewService(userRepository)
+	userController := controllers.NewUserHandler(userService)
+
+	router := gin.Default()
+	api := router.Group("v1/golang-rest-crud/")
+
+	api.POST("/users", userController.AddUser)
+
+	router.Run()
 }

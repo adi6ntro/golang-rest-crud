@@ -5,7 +5,6 @@ import (
 	"log"
 
 	"golang-rest-crud/utils"
-	"net/url"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -41,7 +40,7 @@ func init() {
 	sslmode = utils.GetEnv("MYSQL_SSLMODE", "disable")
 	dbdebug = true
 	if DbOpen() != nil {
-		fmt.Println("Connection to database MySQL is success")
+		fmt.Println("Connection to database MySQL is failed")
 	}
 }
 
@@ -54,7 +53,7 @@ func DbOpen() error {
 			dbaddres, // config.Host,
 			dbport,   //config.Port,
 			dbname,   //config.Schema,
-			url.QueryEscape("Asia/Jakarta"))
+			"Local")
 
 	Dbcon, Errdb = gorm.Open(mysql.Open(args), &gorm.Config{})
 
