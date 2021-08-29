@@ -138,7 +138,7 @@ func (h *userController) DeleteUser(c *gin.Context) {
 
 	_, err := h.userService.DeleteUser(userid)
 	if err != nil {
-		response := utils.APIResponse("Failed to get user", http.StatusBadRequest, "error", nil)
+		response := utils.APIResponse("Failed to delete user", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}

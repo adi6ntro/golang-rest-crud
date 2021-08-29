@@ -148,9 +148,5 @@ func (s *userService) DeleteUser(ID int) (entities.User, error) {
 		return user, err
 	}
 
-	if user.ID == 0 {
-		return user, errors.New("Akun tidak ditemukan")
-	}
-
 	return user, nil
 }
