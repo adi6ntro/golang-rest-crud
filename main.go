@@ -22,7 +22,12 @@ func main() {
 	router := gin.Default()
 	api := router.Group("v1/golang-rest-crud/")
 
-	api.POST("/users", userController.AddUser)
+	api.POST("/sessions", userController.Login)
+	api.GET("/users", userController.GetAllUsers)
+	api.GET("/user", userController.GetUser)
+	api.POST("/users/add", userController.AddUser)
+	api.POST("/users/update", userController.UpdateUser)
+	api.DELETE("/users/delete", userController.DeleteUser)
 
 	router.Run()
 }

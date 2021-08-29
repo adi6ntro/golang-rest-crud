@@ -45,7 +45,6 @@ func init() {
 }
 
 func DbOpen() error {
-	// args := fmt.Sprintf("%s:%s@(%s)/%s?charset=utf8&parseTime=True&loc=%s", dbuser, dbpass, dbaddres, dbport, dbname)
 	args :=
 		fmt.Sprintf("%s:%s@(%s:%s)/%s?charset=utf8&parseTime=True&loc=%s",
 			dbuser,   // config.Username,
